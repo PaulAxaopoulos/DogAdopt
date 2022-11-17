@@ -12,6 +12,9 @@ const schema = new mongoose.Schema({
         comments:{
             type: String,
         },
+        photos: {
+            type:String,
+        },
     }
 );
 

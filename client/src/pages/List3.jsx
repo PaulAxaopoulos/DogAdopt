@@ -1,45 +1,53 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React from "react";
 
-const List = () => {
-    const [newDog,setNewDog]= useState(
-        {
-            name: "",
-            phone: "",
-            comments: "",
-            photos:"",
-        }
-    );
+class List extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      phone: "",
+      comments: "",
+      photos:"",
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-    const handleChange = (e) => {
-        setNewDog({...newDog,[e.target.name]: e.target.value});
-    }
-
-    const handlePhoto= (e) => {
-        setNewDog({...newDog, photos: e.target.files[0]});
-    }
-
-    const handleSubmit = (e) =>{
-        // e.preventDefault();
-        const formData = new FormData();
-        formData.append('name',newDog.name);
-        formData.append('phone',newDog.phone);
-        formData.append('comments',newDog.comments);
-        formData.append('photos',newDog.photos);
-        
-        axios.post("/create", formData)
-        .then(res => {
-            console.log(res);
-        })
-        .catch((err) => {
-            console.log(err);
+  handleInputChange = (e) => {
+    const name = e.target.name;
+    if (name === 'photos'){
+      this.setState({
+        photos: e.target.files[0],
+      });
+      console.log(this.photos)
+    }else {
+      this.setState({
+        [name]: e.target.value,
     });
     }
+    
+  };
+  
+  
+  handleSubmit() {
+    var Dog = {
+      name: this.state.name,
+      phone: this.state.phone,
+      comments: this.state.comments,
+      photos: this.state.photos,
+    };
 
-    return(
-        <div className="d-flex justify-content-center h-75">
+    axios.post("http://localhost:3001/api/create", Dog).catch((err) => {
+      console.log(err);
+    });
+  }
+
+  render() {
+    return (
+      <div className="d-flex justify-content-center h-75">
         <form
-          onSubmit={handleSubmit}
+          onSubmit={this.handleSubmit}
           className="text-center align-self-center bg-dark bg-opacity-50"
           encType="multipart/form-data"
           style={{
@@ -55,8 +63,8 @@ const List = () => {
             <input
               placeholder="Sherlock"
               className="form-control"
-              value={newDog.name}
-              onChange={handleChange}
+              value={this.state.name}
+              onChange={this.handleInputChange}
               name="name"
               label="name"
             ></input>
@@ -71,8 +79,8 @@ const List = () => {
               pattern="[0-9]{10}"
               placeholder="6912345678"
               className="form-control"
-              value={newDog.phone}
-              onChange={handleChange}
+              value={this.state.phone}
+              onChange={this.handleInputChange}
               name="phone"
               label="phone"
             ></input>
@@ -85,8 +93,8 @@ const List = () => {
             <input
               placeholder="A lovely dog "
               className="form-control"
-              value={newDog.comments}
-              onChange={handleChange}
+              value={this.state.comments}
+              onChange={this.handleInputChange}
               name="comments"
               label="comments"
             ></input>
@@ -97,7 +105,7 @@ const List = () => {
               type="file"
               accept=".png, .jpg, .jpeg"
               className="form-control"
-              onChange={handlePhoto} 
+              onChange={this.handleInputChange} 
               name="photos"
               id="inputGroupFile02"
             ></input>
@@ -109,8 +117,7 @@ const List = () => {
           <button type="submit"> Submit </button>
         </form>
       </div>
-
-    )
+    );
+  }
 }
-
 export default List;

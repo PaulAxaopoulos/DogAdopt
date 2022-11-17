@@ -5,7 +5,7 @@ function Dogs() {
   return (
     <div className="h-100 " style={{ padding: "10% 10% " }}>
       <div
-        className="h-100 bg-secondary bg-opacity-50 overflow-auto "
+        className="h-100 bg-secondary bg-opacity-50 overflow-auto m-5 pt-2"
         style={{
           border: "5px solid",
           "borderStyle": "double",

@@ -11,7 +11,7 @@ export default class DogCards extends React.Component {
   };
 
   componentDidMount() {
-    axios.get(`/api/dogs`)
+    axios.get(`/dogs`)
       .then((res) => {
         const dogC = res.data;
         this.setState({ dogC });
