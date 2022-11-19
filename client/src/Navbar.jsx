@@ -20,7 +20,7 @@ function Navbar() {
         <div
           className="offcanvas offcanvas-end text-bg-dark"
           tabIndex="-1"
-          id="offcanvasDarkNavbar"
+          id="offcanvasDarkNavbar"  
           aria-labelledby="offcanvasDarkNavbarLabel"
         >
           <div className="offcanvas-header">
@@ -47,7 +47,7 @@ function Navbar() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/list">
+                <Link className="nav-link " to="/list">
                   List a dog for adoption
                 </Link>
               </li>

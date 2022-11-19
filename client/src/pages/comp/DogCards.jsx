@@ -27,7 +27,7 @@ export default class DogCards extends React.Component {
         <Row xs={1} md={3} className="g-4 align-items-center">
           {this.state.dogC.map((_, idx) => (
             <Col key={this.state.dogC[idx]._id}>
-              <Card>
+              <Card style={{minWidth: "185px"}}>
                 {this.state.dogC[idx].photos === "" ? (
                   <img src={unImg} className="card-img-top"  style={{maxHeight: "500px"}} alt="..."/>                  
                   ) : (
